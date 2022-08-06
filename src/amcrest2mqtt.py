@@ -420,7 +420,7 @@ log("Listening for events...")
 async def main():
     try:
         async for code, payload in camera.async_event_actions("All"):
-            if (is_ad110 and code == "ProfileAlarmTransmit") or (code == "VideoMotion" and not is_ad110):
+            if (is_ad110 and code == "AlarmLocal") or (code == "VideoMotion" and not is_ad110):
                 motion_payload = "on" if payload["action"] == "Start" else "off"
                 mqtt_publish(topics["motion"], motion_payload)
             elif code == "CrossRegionDetection" and payload["data"]["ObjectType"] == "Human":
